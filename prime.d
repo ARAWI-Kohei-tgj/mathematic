@@ -2,6 +2,8 @@
  * Table of Prime numbers
  *
  * Version: 1.0
+ *
+ * Authors: 新井浩平 (ARAI Kohei)
  *****************************************************************************/
 module mathematic.prime;
 
