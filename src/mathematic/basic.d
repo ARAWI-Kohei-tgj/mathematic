@@ -3,6 +3,9 @@
  *
  * Version: 1.1
  *
+ * License:
+ *     $(LINK2 www.boost.org/LICENSE_1_0.txt, Boost License 1.0).
+ *
  * Authors: 新井浩平 (ARAI Kohei)
  *****************************************************************************/
 module mathematic.basic;
@@ -25,7 +28,7 @@ if(isFloatingPoint!T && (OP == "+" || OP == "*")){
  ************************************************************/
 T factorial(T)(in T i) @safe pure nothrow @nogc
 if(isIntegral!T && isUnsigned!T){
-	typeof(return) result= 1u;
+	typeof(return) result= Identity!(T, "*");
 
 	if(i > 1){
 		foreach(T j; 2u..i+1u) result *= j;
@@ -51,7 +54,7 @@ in(n >= k){
 		return n;
 	}
 	else{
-		typeof(return) numerator= 1u;
+		typeof(return) numerator= Identity!(T, "*");
 		foreach(T i; 2u..n-k+1u) numerator *= i;
 		return numerator/factorial(k);
 	}
