@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>mathematic.basic</title>
+    <title>mathematic.complex</title>
     <style type="text/css" media="screen">
       html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
       blockquote, pre, a, abbr, address, cite, code, del, dfn, em, figure,
@@ -512,18 +512,18 @@
   <body id="ddoc_main" class="ddoc dlang">
     <div class="content_wrapper">
       <article class="module">
-        <h1 class="module_name">mathematic.basic</h1>
+        <h1 class="module_name">mathematic.complex</h1>
         <section id="module_content"><section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    Basic mathematic functions
+    Utilities for the codes containing mix of <code class="code">complex</code> number types and real number types.
 
   </p>
 </div>
 <div class="ddoc_version">
   <h4>Version</h4>
   <p class="para">
-    1.2
+    1.0
 
 
   </p>
@@ -549,7 +549,7 @@
   <li class="ddoc_member">
   <div class="ddoc_member_header">
   <div class="ddoc_header_anchor">
-  <a href="#Identity" id="Identity"><code class="code">Identity</code></a>
+  <a href="#isComplex" id="isComplex"><code class="code">isComplex</code></a>
 </div>
 </div><div class="ddoc_decl">
   <section class="section">
@@ -558,7 +558,8 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="Identity"></span>template <code class="code">Identity</code>(T, string OP) if ((isFloatingPoint!T || isIntegral!T) &amp;&amp; (OP == "+" || OP == "*"))
+            <span class="ddoc_anchor" id="isComplex"></span>enum auto <code class="code">isComplex</code>(T);
+
           </code>
         </p>
       </div>
@@ -569,10 +570,148 @@
   <section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    <code class="code">Identity</code> element of additive and multiplicative.
+    Detects whether <b>T</b> is a complex number types of standard library.
   </p>
 </div>
 
+</section>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#BaseRealType" id="BaseRealType"><code class="code">BaseRealType</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="BaseRealType"></span>template <code class="code">BaseRealType</code>(T) if (isFloatingPoint!T)<br>
+template <code class="code">BaseRealType</code>(C : Complex!R, R)
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Gets the base type of complex numbers.
+ Additionally, the real number types are also accepted as the template argument.
+  </p>
+</div>
+<div class="ddoc_examples">
+  <h4>Examples</h4>
+  <p class="para">
+    
+<section class="code_listing">
+  <div class="code_sample">
+    <div class="dlang">
+      <ol class="code_lines">
+        <li><pre><code class="code"><span class="keyword">import</span> std.complex: Complex;
+<span class="keyword">assert</span>(<span class="keyword">is</span>(<span class="psymbol">BaseRealType</span>!(Complex!<span class="keyword">double</span>) == <span class="keyword">double</span>));
+<span class="keyword">assert</span>(<span class="keyword">is</span>(<span class="psymbol">BaseRealType</span>!<span class="keyword">real</span> == <span class="keyword">real</span>));
+</code></pre></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+  </p>
+</div>
+</section>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#isRegardedAsRealNum" id="isRegardedAsRealNum"><code class="code">isRegardedAsRealNum</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="isRegardedAsRealNum"></span>bool <code class="code">isRegardedAsRealNum</code>(CT)(in CT <code class="code">num</code>, in BaseRealType!CT <code class="code">maxDiffAbs</code> = 1e-06L) if (isComplex!CT);
+
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Computes whether the imaginary part of <b><code class="code">num</code></b> is apploximately equal to zero.
+
+  </p>
+</div>
+<div class="ddoc_params">
+  <h4>Parameters</h4>
+  <table cellspacing="0" cellpadding="5" border="0" class="graybox">
+    <tbody>
+      <tr class="ddoc_param_row">
+  <td scope="ddoc_param_id">
+  <code class="code">
+    <em class="term">CT <code class="code">num</code></em>
+  </code>
+</td>
+<td>
+  <div class="ddoc_param_desc">
+    <p class="para">
+      The variable in complex number type.
+    </p>
+  </div>
+</td>
+</tr>
+<tr class="ddoc_param_row">
+  <td scope="ddoc_param_id">
+  <code class="code">
+    <em class="term">BaseRealType!CT <code class="code">maxDiffAbs</code></em>
+  </code>
+</td>
+<td>
+  <div class="ddoc_param_desc">
+    <p class="para">
+      Maximum absolute difference.
+    </p>
+  </div>
+</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="ddoc_examples">
+  <h4>Examples</h4>
+  <p class="para">
+    
+<section class="code_listing">
+  <div class="code_sample">
+    <div class="dlang">
+      <ol class="code_lines">
+        <li><pre><code class="code"><span class="keyword">import</span> std.complex: Complex;
+<span class="keyword">assert</span>( <span class="psymbol">isRegardedAsRealNum</span>!(Complex!<span class="keyword">double</span>)(Complex!<span class="keyword">double</span>(2.0, 9.0E-7)) );
+<span class="keyword">assert</span>( !<span class="psymbol">isRegardedAsRealNum</span>!(Complex!<span class="keyword">double</span>)(Complex!<span class="keyword">double</span>(2.0, 3.0)) );
+</code></pre></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+  </p>
+</div>
 </section>
 
 </div>
@@ -589,7 +728,7 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="isCloseToZero"></span>bool <code class="code">isCloseToZero</code>(T)(in T <code class="code">num</code>, in T <code class="code">maxDiffAbs</code> = 1e-06L) if (isFloatingPoint!T);
+            <span class="ddoc_anchor" id="isCloseToZero"></span>bool <code class="code">isCloseToZero</code>(T)(in T <code class="code">num</code>, in BaseRealType!T <code class="code">maxDiffAbs</code> = 1e-06L) if (isComplex!T);
 
           </code>
         </p>
@@ -626,7 +765,7 @@
 <tr class="ddoc_param_row">
   <td scope="ddoc_param_id">
   <code class="code">
-    <em class="term">T <code class="code">maxDiffAbs</code></em>
+    <em class="term">BaseRealType!T <code class="code">maxDiffAbs</code></em>
   </code>
 </td>
 <td>
@@ -649,7 +788,7 @@
 </li><li class="ddoc_member">
   <div class="ddoc_member_header">
   <div class="ddoc_header_anchor">
-  <a href="#factorial" id="factorial"><code class="code">factorial</code></a>
+  <a href="#re" id="re"><code class="code">re</code></a>
 </div>
 </div><div class="ddoc_decl">
   <section class="section">
@@ -658,7 +797,7 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="factorial"></span>pure nothrow @nogc @safe T <code class="code">factorial</code>(T)(in T <code class="code">i</code>) if (isIntegral!T &amp;&amp; isUnsigned!T);
+            <span class="ddoc_anchor" id="re"></span>T <code class="code">re</code>(T)(in T <code class="code">num</code>) if (isFloatingPoint!T || isIntegral!T);
 
           </code>
         </p>
@@ -670,14 +809,14 @@
   <section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    Calculation of the <code class="code">factorial</code> <i><code class="code">i</code></i>! by simple multiplication.
+    Represents the method '<code class="code">re</code>' of 'Complex!T' with assuming <b>T</b> as a complex number.
 
   </p>
 </div>
-<div class="ddoc_description">
-  <h4>Discussion</h4>
+<div class="ddoc_returns">
+  <h4>Return Value</h4>
   <p class="para">
-    The time complexity is <i>O</i>(<i>n</i>).
+    Always itself as real part.
   </p>
 </div>
 <div class="ddoc_examples">
@@ -688,9 +827,8 @@
   <div class="code_sample">
     <div class="dlang">
       <ol class="code_lines">
-        <li><pre><code class="code"><span class="keyword">assert</span>(<span class="psymbol">factorial</span>!<span class="keyword">uint</span>(0) == 1);
-<span class="keyword">assert</span>(<span class="psymbol">factorial</span>(1u) == 1);
-<span class="keyword">assert</span>(<span class="psymbol">factorial</span>(6u) == 720);
+        <li><pre><code class="code"><span class="keyword">double</span> foo= 4.0;
+<span class="keyword">assert</span>(foo.<span class="psymbol">re</span> == 4.0);
 </code></pre></li>
       </ol>
     </div>
@@ -706,7 +844,7 @@
 </li><li class="ddoc_member">
   <div class="ddoc_member_header">
   <div class="ddoc_header_anchor">
-  <a href="#combination" id="combination"><code class="code">combination</code></a>
+  <a href="#im" id="im"><code class="code">im</code></a>
 </div>
 </div><div class="ddoc_decl">
   <section class="section">
@@ -715,7 +853,7 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="combination"></span>pure nothrow @nogc @safe T <code class="code">combination</code>(T)(in T <code class="code">n</code>, in T <code class="code">k</code>) if (isIntegral!T &amp;&amp; isUnsigned!T);
+            <span class="ddoc_anchor" id="im"></span>T <code class="code">im</code>(T)(in T <code class="code">num</code>) if (isFloatingPoint!T || isIntegral!T);
 
           </code>
         </p>
@@ -727,7 +865,14 @@
   <section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    Calculation of the <code class="code">combination</code> C(<i><code class="code">n</code></i>, <i><code class="code">k</code></i>).
+    Represents the method '<code class="code">im</code>' of 'Complex!T' with assuming <b>T</b> as a complex number.
+
+  </p>
+</div>
+<div class="ddoc_returns">
+  <h4>Return Value</h4>
+  <p class="para">
+    Always zero as imaginally part.
   </p>
 </div>
 <div class="ddoc_examples">
@@ -738,11 +883,120 @@
   <div class="code_sample">
     <div class="dlang">
       <ol class="code_lines">
-        <li><pre><code class="code"><span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(6, 0) == 1);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(6, 1) == 6);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(6, 5) == 6);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(11, 6) == 462);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">ulong</span>(32, 8) == 10_518_300);
+        <li><pre><code class="code"><span class="keyword">double</span> foo= -3.0;
+<span class="keyword">assert</span>(foo.<span class="psymbol">im</span> == 0.0);
+</code></pre></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+  </p>
+</div>
+</section>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#conj" id="conj"><code class="code">conj</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="conj"></span>T <code class="code">conj</code>(T)(in T <code class="code">num</code>) if (isFloatingPoint!T || isIntegral!T);
+
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Represents the function '<code class="code">conj</code>' defined in std.complex.d with assuming <b>T</b> as a complex number.
+
+  </p>
+</div>
+<div class="ddoc_returns">
+  <h4>Return Value</h4>
+  <p class="para">
+    Always itself as conjugate.
+  </p>
+</div>
+<div class="ddoc_examples">
+  <h4>Examples</h4>
+  <p class="para">
+    
+<section class="code_listing">
+  <div class="code_sample">
+    <div class="dlang">
+      <ol class="code_lines">
+        <li><pre><code class="code"><span class="keyword">double</span> foo= 4.0;
+<span class="keyword">assert</span>(foo.<span class="psymbol">conj</span> == 4.0);
+</code></pre></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+  </p>
+</div>
+</section>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#sqAbs" id="sqAbs"><code class="code">sqAbs</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="sqAbs"></span>T <code class="code">sqAbs</code>(T)(in T <code class="code">num</code>) if (isFloatingPoint!T || isIntegral!T);
+
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Represents the function '<code class="code">sqAbs</code>' defined in 'std.complex.d with assuming <b>T</b> as a complex number.
+
+  </p>
+</div>
+<div class="ddoc_returns">
+  <h4>Return Value</h4>
+  <p class="para">
+    The squared of itself.
+  </p>
+</div>
+<div class="ddoc_examples">
+  <h4>Examples</h4>
+  <p class="para">
+    
+<section class="code_listing">
+  <div class="code_sample">
+    <div class="dlang">
+      <ol class="code_lines">
+        <li><pre><code class="code"><span class="keyword">double</span> foo= -3.0;
+<span class="keyword">assert</span>(foo.<span class="psymbol">sqAbs</span> == 9.0);
 </code></pre></li>
       </ol>
     </div>

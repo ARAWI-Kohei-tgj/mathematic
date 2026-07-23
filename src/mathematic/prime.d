@@ -60,7 +60,7 @@ unittest{
 	}
 
 	{
-		int[] num= getPrimeNumbers!int(0, 8, 128);
+		int[] num= getPrimeNumbers!int(127, 8, 128);
 		int[8] result= [719, 1619, 2657, 3671, 4751, 5849, 6971, 8161];
 		assert(num.equal(result[]));
 	}

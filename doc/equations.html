@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>mathematic.basic</title>
+    <title>mathematic.equations</title>
     <style type="text/css" media="screen">
       html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
       blockquote, pre, a, abbr, address, cite, code, del, dfn, em, figure,
@@ -512,18 +512,18 @@
   <body id="ddoc_main" class="ddoc dlang">
     <div class="content_wrapper">
       <article class="module">
-        <h1 class="module_name">mathematic.basic</h1>
+        <h1 class="module_name">mathematic.equations</h1>
         <section id="module_content"><section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    Basic mathematic functions
+    Solver of Linear <code class="code">equations</code> and Quadratic <code class="code">equations</code>
 
   </p>
 </div>
 <div class="ddoc_version">
   <h4>Version</h4>
   <p class="para">
-    1.2
+    1.0
 
 
   </p>
@@ -538,7 +538,9 @@
 <div class="ddoc_authors">
   <h4>Authors</h4>
   <p class="para">
-    新井浩平 (ARAI Kohei)
+    新井 浩平 (ARAI Kohei)
+
+
   </p>
 </div>
 
@@ -549,7 +551,7 @@
   <li class="ddoc_member">
   <div class="ddoc_member_header">
   <div class="ddoc_header_anchor">
-  <a href="#Identity" id="Identity"><code class="code">Identity</code></a>
+  <a href="#SolutionType" id="SolutionType"><code class="code">SolutionType</code></a>
 </div>
 </div><div class="ddoc_decl">
   <section class="section">
@@ -558,7 +560,8 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="Identity"></span>template <code class="code">Identity</code>(T, string OP) if ((isFloatingPoint!T || isIntegral!T) &amp;&amp; (OP == "+" || OP == "*"))
+            <span class="ddoc_anchor" id="SolutionType"></span>enum <code class="code">SolutionType</code>: ubyte;
+
           </code>
         </p>
       </div>
@@ -569,7 +572,36 @@
   <section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    <code class="code">Identity</code> element of additive and multiplicative.
+    List of solution types
+  </p>
+</div>
+
+</section>
+<ul class="ddoc_members">
+  <li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#SolutionType.OneR" id="SolutionType.OneR"><code class="code">OneR</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="SolutionType.OneR"></span><code class="code">OneR</code>
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    One solution of real number
   </p>
 </div>
 
@@ -580,7 +612,7 @@
 </li><li class="ddoc_member">
   <div class="ddoc_member_header">
   <div class="ddoc_header_anchor">
-  <a href="#isCloseToZero" id="isCloseToZero"><code class="code">isCloseToZero</code></a>
+  <a href="#SolutionType.RepeatedR" id="SolutionType.RepeatedR"><code class="code">RepeatedR</code></a>
 </div>
 </div><div class="ddoc_decl">
   <section class="section">
@@ -589,8 +621,7 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="isCloseToZero"></span>bool <code class="code">isCloseToZero</code>(T)(in T <code class="code">num</code>, in T <code class="code">maxDiffAbs</code> = 1e-06L) if (isFloatingPoint!T);
-
+            <span class="ddoc_anchor" id="SolutionType.RepeatedR"></span><code class="code">RepeatedR</code>
           </code>
         </p>
       </div>
@@ -601,45 +632,8 @@
   <section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    Computes whether <b><code class="code">num</code></b> is approximately equal to zero.
-
+    Double root of real number
   </p>
-</div>
-<div class="ddoc_params">
-  <h4>Parameters</h4>
-  <table cellspacing="0" cellpadding="5" border="0" class="graybox">
-    <tbody>
-      <tr class="ddoc_param_row">
-  <td scope="ddoc_param_id">
-  <code class="code">
-    <em class="term">T <code class="code">num</code></em>
-  </code>
-</td>
-<td>
-  <div class="ddoc_param_desc">
-    <p class="para">
-      The variable to be computed.
-    </p>
-  </div>
-</td>
-</tr>
-<tr class="ddoc_param_row">
-  <td scope="ddoc_param_id">
-  <code class="code">
-    <em class="term">T <code class="code">maxDiffAbs</code></em>
-  </code>
-</td>
-<td>
-  <div class="ddoc_param_desc">
-    <p class="para">
-      Maximum absolute difference.
-    </p>
-  </div>
-</td>
-</tr>
-
-    </tbody>
-  </table>
 </div>
 
 </section>
@@ -649,7 +643,7 @@
 </li><li class="ddoc_member">
   <div class="ddoc_member_header">
   <div class="ddoc_header_anchor">
-  <a href="#factorial" id="factorial"><code class="code">factorial</code></a>
+  <a href="#SolutionType.TwoR" id="SolutionType.TwoR"><code class="code">TwoR</code></a>
 </div>
 </div><div class="ddoc_decl">
   <section class="section">
@@ -658,8 +652,7 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="factorial"></span>pure nothrow @nogc @safe T <code class="code">factorial</code>(T)(in T <code class="code">i</code>) if (isIntegral!T &amp;&amp; isUnsigned!T);
-
+            <span class="ddoc_anchor" id="SolutionType.TwoR"></span><code class="code">TwoR</code>
           </code>
         </p>
       </div>
@@ -670,35 +663,10 @@
   <section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    Calculation of the <code class="code">factorial</code> <i><code class="code">i</code></i>! by simple multiplication.
+    Two solutions of real numbers
+  </p>
+</div>
 
-  </p>
-</div>
-<div class="ddoc_description">
-  <h4>Discussion</h4>
-  <p class="para">
-    The time complexity is <i>O</i>(<i>n</i>).
-  </p>
-</div>
-<div class="ddoc_examples">
-  <h4>Examples</h4>
-  <p class="para">
-    
-<section class="code_listing">
-  <div class="code_sample">
-    <div class="dlang">
-      <ol class="code_lines">
-        <li><pre><code class="code"><span class="keyword">assert</span>(<span class="psymbol">factorial</span>!<span class="keyword">uint</span>(0) == 1);
-<span class="keyword">assert</span>(<span class="psymbol">factorial</span>(1u) == 1);
-<span class="keyword">assert</span>(<span class="psymbol">factorial</span>(6u) == 720);
-</code></pre></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-  </p>
-</div>
 </section>
 
 </div>
@@ -706,7 +674,7 @@
 </li><li class="ddoc_member">
   <div class="ddoc_member_header">
   <div class="ddoc_header_anchor">
-  <a href="#combination" id="combination"><code class="code">combination</code></a>
+  <a href="#SolutionType.OneC" id="SolutionType.OneC"><code class="code">OneC</code></a>
 </div>
 </div><div class="ddoc_decl">
   <section class="section">
@@ -715,7 +683,105 @@
       <div class="dlang">
         <p class="para">
           <code class="code">
-            <span class="ddoc_anchor" id="combination"></span>pure nothrow @nogc @safe T <code class="code">combination</code>(T)(in T <code class="code">n</code>, in T <code class="code">k</code>) if (isIntegral!T &amp;&amp; isUnsigned!T);
+            <span class="ddoc_anchor" id="SolutionType.OneC"></span><code class="code">OneC</code>
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    One solution of complex number
+  </p>
+</div>
+
+</section>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#SolutionType.RepeatedC" id="SolutionType.RepeatedC"><code class="code">RepeatedC</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="SolutionType.RepeatedC"></span><code class="code">RepeatedC</code>
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Double root of complex number
+  </p>
+</div>
+
+</section>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#SolutionType.TwoC" id="SolutionType.TwoC"><code class="code">TwoC</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="SolutionType.TwoC"></span><code class="code">TwoC</code>
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Two solutions of complex numbers
+  </p>
+</div>
+
+</section>
+
+</div>
+
+</li>
+</ul>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#LinearEq" id="LinearEq"><code class="code">LinearEq</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="LinearEq"></span>struct <code class="code">LinearEq</code>(T) if (isFloatingPoint!T || isComplex!T);
 
           </code>
         </p>
@@ -727,31 +793,179 @@
   <section class="section ddoc_sections">
   <div class="ddoc_summary">
   <p class="para">
-    Calculation of the <code class="code">combination</code> C(<i><code class="code">n</code></i>, <i><code class="code">k</code></i>).
+    Linear equation
+ <i>y</i> $thinsp;= <i>ax</i> +<i>b</i>
   </p>
 </div>
-<div class="ddoc_examples">
-  <h4>Examples</h4>
-  <p class="para">
-    
-<section class="code_listing">
-  <div class="code_sample">
-    <div class="dlang">
-      <ol class="code_lines">
-        <li><pre><code class="code"><span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(6, 0) == 1);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(6, 1) == 6);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(6, 5) == 6);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">uint</span>(11, 6) == 462);
-<span class="keyword">assert</span>(<span class="psymbol">combination</span>!<span class="keyword">ulong</span>(32, 8) == 10_518_300);
-</code></pre></li>
-      </ol>
+
+</section>
+<ul class="ddoc_members">
+  <li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#LinearEq.value" id="LinearEq.value"><code class="code">value</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="LinearEq.value"></span>T <code class="code">value</code>(in T <code class="code">x</code>);
+
+          </code>
+        </p>
+      </div>
     </div>
-  </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Get the <code class="code">value</code> at given <i><code class="code">x</code></i>
+  </p>
+</div>
+
 </section>
 
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#LinearEq.solve" id="LinearEq.solve"><code class="code">solve</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="LinearEq.solve"></span>@property T <code class="code">solve</code>();
+
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Get the solution which satisfies <i>y</i>=0.
   </p>
 </div>
+
 </section>
+
+</div>
+
+</li>
+</ul>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#QuadraticEq" id="QuadraticEq"><code class="code">QuadraticEq</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="QuadraticEq"></span>struct <code class="code">QuadraticEq</code>(T) if (isFloatingPoint!T || isComplex!T);
+
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Quadratic equation
+ <i>y</i>$thinsp;= <i>ax</i><sup style="vertical-align:super;font-size:80%">2</sup>$thinsp;+<i>bx</i>$thinsp;+<i>c</i>
+  </p>
+</div>
+
+</section>
+<ul class="ddoc_members">
+  <li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#QuadraticEq.value" id="QuadraticEq.value"><code class="code">value</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="QuadraticEq.value"></span>T <code class="code">value</code>(in T <code class="code">x</code>);
+
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Get the <code class="code">value</code> at given <i><code class="code">x</code></i>
+  </p>
+</div>
+
+</section>
+
+</div>
+
+</li><li class="ddoc_member">
+  <div class="ddoc_member_header">
+  <div class="ddoc_header_anchor">
+  <a href="#QuadraticEq.solve" id="QuadraticEq.solve"><code class="code">solve</code></a>
+</div>
+</div><div class="ddoc_decl">
+  <section class="section">
+    <div class="declaration">
+      <h4>Declaration</h4>
+      <div class="dlang">
+        <p class="para">
+          <code class="code">
+            <span class="ddoc_anchor" id="QuadraticEq.solve"></span>@property CT[2] <code class="code">solve</code>();
+
+          </code>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ddoc_decl">
+  <section class="section ddoc_sections">
+  <div class="ddoc_summary">
+  <p class="para">
+    Get the solution which satisfies <i>y</i>$thinsp;=0.
+  </p>
+</div>
+
+</section>
+
+</div>
+
+</li>
+</ul>
 
 </div>
 

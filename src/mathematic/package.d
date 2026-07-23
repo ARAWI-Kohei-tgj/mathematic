@@ -1,6 +1,22 @@
+/****************************************************************************
+ * $(BOOKTABLE,
+ * $(TR $(TH Category) $(TH Templates) )
+ * $(TR $(TD Mathematical traits) $(TD
+ *     $(LREF Identity)
+ * ))
+ * $(TR $(TD Categories of types) $(TD
+ *     $(LREF isComplex)
+ * ))
+ * $(TR $(TD Type combersion) $(TD
+ *     $(LREF BasaeRealType)
+ * ))
+ * )
+ ****************************************************************************/
 module mathematic;
 
-import basic;
-import prime;
-import progression;
-import equations;
+public:
+import mathematic.basic;
+import mathematic.prime;
+import mathematic.progression;
+import mathematic.complex;
+import mathematic.equations;

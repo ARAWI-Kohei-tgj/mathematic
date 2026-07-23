@@ -1,0 +1,17 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/mathematic
+mathematic.so
+mathematic.dylib
+mathematic.dll
+libmathematic.a
+mathematic.a
+mathematic.lib
+mathematic-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst

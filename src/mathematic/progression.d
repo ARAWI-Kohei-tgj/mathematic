@@ -39,7 +39,7 @@ import std.traits: isIntegral;
  *
  * Calculates the sum of the natural numbers up to $(I n),
  * like 0+1+2+…+$(I n), using following equation
- * $(SUM_EQUALS $(I i)=1, $(I n), $(I i), =&thinsp;$(FRAC $(I n)&thinsp;($(I n)+1), 2)&thinsp;.)
+ * $(SUM_EQUALS $(I i)=0, $(I n), $(I i), =&thinsp;$(FRAC $(I n)&thinsp;($(I n)+1), 2)&thinsp;.)
  *
  * Params:
  *     n= end of the progression
@@ -57,11 +57,27 @@ in((is(Z == byte) && n <= 15) ||
    (is(Z == ulong) && n <= 6_074_000_000)){
 	if(n > 0){
 		static if(Z.sizeof < 8){
-			ulong x= n*(n+1u)/2u;
+			ulong x;
+			if(n%2){
+				x= (n+1)/2;
+				x *= n;
+			}
+			else{
+				x= n/2;
+				x *= n+1;
+			}
 		}
 		else{
 			import std.int128: Int128;
-			Int128 x= n*(n+1u)/2u;
+			Int128 x;
+			if(n%2){
+				x= Int128((n+1uL)/2u);
+				x *= n;
+			}
+			else{
+				x= Int128(n/2uL);
+				x *= n+1UL;
+			}
 		}
 		return cast(Z)x;
 	}
@@ -70,7 +86,8 @@ in((is(Z == byte) && n <= 15) ||
 	}
 }
 unittest{
-	assert(sumFromZero!ubyte(0) == 0);
+	assert(sumFromZero!byte(0) == 0);
+	assert(sumFromZero!ushort(5) == 15);
 	assert(sumFromZero!int(65_535) == 2_147_450_880);
 	assert(sumFromZero!uint(92_681) == 4_294_930_221U);
 	assert(sumFromZero!long(4_294_967_295L) == 9_223_372_034_707_292_160L);
@@ -108,7 +125,7 @@ unittest{
  *
  * Calculates the squared sum of the natural numbers up to $(I n),
  * like 0+1+4+…+$(I n)$(SUP 2), using following equation
- *  $(SUM_EQUALS $(I i)=1, $(I n), $(I i)&thinsp;$(SUP 2), =&thinsp;$(FRAC $(I n)&thinsp;($(I n)+1)(2$(I n)+1), 6)&thinsp;.)
+ *  $(SUM_EQUALS $(I i)=0, $(I n), $(I i)&thinsp;$(SUP 2), =&thinsp;$(FRAC $(I n)&thinsp;($(I n)+1)(2$(I n)+1), 6)&thinsp;.)
  *
  * Params:
  *     n= end of the progression

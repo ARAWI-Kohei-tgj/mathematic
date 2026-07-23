@@ -1,0 +1,9 @@
+{
+	"description": "Mathematical utils",
+	"license": "BSL-1.0",
+	"authors": [
+		"ARAI Kohei"
+	],
+	"copyright": "Copyright © 2026, ARAI Kohei",
+	"name": "mathematic"
+}

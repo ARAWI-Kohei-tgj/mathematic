@@ -1,25 +1,45 @@
 /****************************************************************************
  * Basic mathematic functions
  *
- * Version: 1.1
+ * Version: 1.2
  *
  * License:
  *     $(LINK2 www.boost.org/LICENSE_1_0.txt, Boost License 1.0).
  *
- * Authors: 新井浩平 (ARAI Kohei)
+ * Authors:
+ *     新井浩平 (ARAI Kohei)
  *****************************************************************************/
 module mathematic.basic;
 
 import std.traits: isIntegral, isUnsigned, isFloatingPoint;
 
 /************************************************************
- * Identity of additive and multiplicative.
+ * Identity element of additive and multiplicative.
  ************************************************************/
 template Identity(T, string OP)
-if(isFloatingPoint!T && (OP == "+" || OP == "*")){
-	static if(OP == "+") enum T Identity= T(0.0L);
-	else static if(OP == "*") enum T Identity= T(1.0L);
+if((isFloatingPoint!T || isIntegral!T) &&
+   (OP == "+" || OP == "*")){
+	static if(OP == "+") enum T Identity= cast(T)0;
+	else static if(OP == "*") enum T Identity= cast(T)1;
 }
+
+
+/************************************************************
+ * Computes whether $(B num) is approximately equal to zero.
+ *
+ * Params:
+ *     num= The variable to be computed.
+ *     maxDiffAbs= Maximum absolute difference.
+ ************************************************************/
+bool isCloseToZero(T)(in T num, in T maxDiffAbs= 1.0E-6L)
+if(isFloatingPoint!T){
+	import std.math: fabs;
+	return (num.fabs < maxDiffAbs)? true: false;
+}
+unittest{
+	assert(isCloseToZero!double(9.0E-7));
+}
+
 
 /************************************************************
  * Calculation of the factorial $(I i)! by simple multiplication.
@@ -35,6 +55,7 @@ if(isIntegral!T && isUnsigned!T){
 	}
 	return result;
 }
+///
 unittest{
 	assert(factorial!uint(0) == 1);
 	assert(factorial(1u) == 1);
@@ -55,15 +76,15 @@ in(n >= k){
 	}
 	else{
 		typeof(return) numerator= Identity!(T, "*");
-		foreach(T i; 2u..n-k+1u) numerator *= i;
+		for(T i= n; i > n-k; --i) numerator *= i;
 		return numerator/factorial(k);
 	}
 }
-
+///
 unittest{
 	assert(combination!uint(6, 0) == 1);
 	assert(combination!uint(6, 1) == 6);
 	assert(combination!uint(6, 5) == 6);
 	assert(combination!uint(11, 6) == 462);
-	assert(combination!uint(32, 8) == 10_518_300);
+	assert(combination!ulong(32, 8) == 10_518_300);
 }
